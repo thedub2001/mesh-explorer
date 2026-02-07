@@ -1,0 +1,114 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mesh-explorer.dev/schema/graph.schema.json",
+  "title": "Cognitive Graph Schema v1",
+  "type": "object",
+  "required": ["version", "graph", "nodes", "relations", "files", "types", "projections"],
+  "properties": {
+    "version": {
+      "type": "string",
+      "const": "1.0"
+    },
+    "graph": { "$ref": "#/definitions/graphRecord" },
+    "nodes": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/nodeRecord" }
+    },
+    "relations": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/relationRecord" }
+    },
+    "files": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/fileRecord" }
+    },
+    "types": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/typeRecord" }
+    },
+    "projections": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/projectionRecord" }
+    }
+  },
+  "definitions": {
+    "graphRecord": {
+      "type": "object",
+      "required": ["id", "name", "metadata", "createdAt", "updatedAt"],
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "description": { "type": "string" },
+        "metadata": { "type": "object" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "additionalProperties": false
+    },
+    "nodeRecord": {
+      "type": "object",
+      "required": ["id", "typeId", "label", "data", "createdAt", "updatedAt"],
+      "properties": {
+        "id": { "type": "string" },
+        "typeId": { "type": "string" },
+        "label": { "type": "string" },
+        "data": { "type": "object" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "additionalProperties": false
+    },
+    "relationRecord": {
+      "type": "object",
+      "required": ["id", "typeId", "fromNodeId", "toNodeId", "data", "createdAt"],
+      "properties": {
+        "id": { "type": "string" },
+        "typeId": { "type": "string" },
+        "fromNodeId": { "type": "string" },
+        "toNodeId": { "type": "string" },
+        "data": { "type": "object" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "additionalProperties": false
+    },
+    "fileRecord": {
+      "type": "object",
+      "required": ["id", "name", "mimeType", "sizeBytes", "blobId", "metadata", "createdAt"],
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "mimeType": { "type": "string" },
+        "sizeBytes": { "type": "integer", "minimum": 0 },
+        "blobId": { "type": "string" },
+        "metadata": { "type": "object" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "additionalProperties": false
+    },
+    "typeRecord": {
+      "type": "object",
+      "required": ["id", "name", "schema", "behavior", "createdAt", "updatedAt"],
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "schema": { "type": "object" },
+        "behavior": { "type": "object" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "additionalProperties": false
+    },
+    "projectionRecord": {
+      "type": "object",
+      "required": ["id", "name", "definition", "createdAt", "updatedAt"],
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "definition": { "type": "object" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "additionalProperties": false
+    }
+  }
+}
